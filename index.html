@@ -79,6 +79,47 @@
       color: #007bff;
       text-decoration: none;
     }
+    /* Main content */
+    .main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 60px;
+    }
+
+    .info {
+      max-width: 50%;
+    }
+
+    .info h1 {
+      font-size: 48px;
+      margin-bottom: 10px;
+    }
+
+    .typing {
+      font-size: 20px;
+      color: #555;
+      margin-bottom: 30px;
+      height: 30px;
+    }
+
+    .socials a {
+      margin-right: 15px;
+      font-size: 18px;
+      color: #ffffff;
+      background-color: #007bff;
+      padding: 10px;
+      border-radius: 50%;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .photo img {
+      border-radius: 10px;
+      width: 300px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
 </style>
 </head>
 <body>
@@ -98,6 +139,22 @@
       Derechos de autor © 2025 por <a href="#">Milagros Rimolo</a>
     </div>
   </div>
-  
+  <div class="main">
+    <div class="info">
+      <h1>Milagros Rimolo</h1>
+      <div class="typing" id="typing"></div>
+      <div class="socials">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-behance"></i></a>
+      </div>
+    </div>
+    <div class="photo">
+      <!-- Aquí irá tu imagen -->
+      <img src="tu-imagen.jpg" alt="Milagros Rimolo">
+    </div>
+  </div>
 </body>
 </html>
