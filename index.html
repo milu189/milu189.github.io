@@ -326,5 +326,128 @@
     </div>
   </div>
 </section>
+ <!-- contacto -->
+ <section id="contacto" style="padding: 4rem 2rem; background: #0c0c0e; color: white;">
+  <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 1rem; font-weight: bold; color: #ffffff;">Contáctame</h2>
+  <p style="text-align: center; color: #bbb; margin-bottom: 3rem;">¿Querés ponerte en contacto conmigo? Completá el formulario y te responderé lo antes posible.</p>
+
+  <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 3rem; max-width: 1200px; margin: auto;">
+    
+    <!-- Formulario -->
+    <form id="formContacto" action="https://formspree.io/f/xpwdqwpk" method="post"
+      style="flex: 1; min-width: 300px; max-width: 500px; background: #1e1e24; padding: 2rem; border-radius: 1rem; box-shadow: 0 0 15px rgba(0,0,0,0.3); display: flex; flex-direction: column; gap: 1rem;">
+      
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <i data-lucide="user" style="color: #BF6B51;"></i>
+        <input type="text" name="nombre" placeholder="Tu nombre" required
+          style="flex: 1; padding: 0.8rem; border: none; border-radius: 8px; background: #f3f3f3; color: #333;">
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <i data-lucide="mail" style="color: #BF6B51;"></i>
+        <input type="email" name="email" placeholder="Tu email" required
+          style="flex: 1; padding: 0.8rem; border: none; border-radius: 8px; background: #f3f3f3; color: #333;">
+      </div>
+
+      <div style="display: flex; align-items: start; gap: 0.5rem;">
+        <i data-lucide="message-circle" style="color: #BF6B51; margin-top: 0.5rem;"></i>
+        <textarea name="mensaje" placeholder="Tu mensaje" rows="5" required
+          style="flex: 1; padding: 0.8rem; border: none; border-radius: 8px; background: #f3f3f3; color: #333;"></textarea>
+      </div>
+
+      <button type="submit"
+        style="padding: 1rem; background-color: #BF6B51; color: white; border: none; border-radius: 8px; font-size: 1rem; cursor: pointer; transition: background 0.3s;">
+        Enviar Mensaje
+      </button>
+    </form>
+
+    <!-- Info de contacto QR -->
+    <div
+      style="flex: 1; min-width: 300px; max-width: 400px; background: #1e1e24; padding: 2rem; border-radius: 1rem; box-shadow: 0 0 15px rgba(0,0,0,0.3); text-align: center;">
+      <p style="font-size: 1.5rem; color: #ffffff; margin-bottom: 1rem;"><i data-lucide="phone" style="vertical-align: middle; margin-right: 0.5rem;"></i>WhatsApp</p>
+      <p style="font-size: 1.2rem; color: #bbb; margin-bottom: 2rem;"><strong>+54 9 2352 562830</strong></p>
+      <img src="codqr.png" alt="QR WhatsApp"
+        style="width: 200px; height: 200px; object-fit: cover; border-radius: 0.5rem; transition: transform 0.3s ease;"
+        onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+    </div>
+  </div>
+
+  <!-- Mensaje de confirmación -->
+  <div id="mensaje-enviado"
+    style="display:none; margin-top: 2rem; padding: 1rem; background: #28a745; color: white; border-radius: 8px; text-align: center; font-weight: bold;">
+    ¡Gracias! Tu mensaje fue enviado.
+  </div>
+</section>
+
+<script>
+  lucide.createIcons();
+</script>
+
+
+<script>
+  const roles = ["analista en sistema", "aws"];
+  let i = 0;
+  let j = 0;
+  let current = "";
+  let isDeleting = false;
+
+  function type() {
+    const typingElement = document.getElementById("typing");
+
+    if (!isDeleting && j <= roles[i].length) {
+      current = roles[i].substring(0, j++);
+      typingElement.innerHTML = `Yo soy <strong>${current}</strong>`;
+      setTimeout(type, 100);
+    } else if (isDeleting && j >= 0) {
+      current = roles[i].substring(0, j--);
+      typingElement.innerHTML = `Yo soy <strong>${current}</strong>`;
+      setTimeout(type, 50);
+    } else {
+      isDeleting = !isDeleting;
+      if (!isDeleting) i = (i + 1) % roles.length;
+      setTimeout(type, 800);
+    }
+  }
+
+  type();
+</script>
+<script>
+  const form = document.getElementById('formContacto');
+  const mensaje = document.getElementById('mensaje-enviado');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault(); // Evita que recargue la página
+
+    const data = new FormData(form);
+    const response = await fetch(form.action, {
+      method: 'POST',
+      body: data,
+      headers: {
+        'Accept': 'application/json'
+      }
+    });
+
+    if (response.ok) {
+      form.reset();
+      mensaje.style.display = 'block';
+      mensaje.textContent = '¡Gracias! Tu mensaje fue enviado.';
+
+      // Ocultar el mensaje después de 5 segundos
+      setTimeout(() => {
+        mensaje.style.display = 'none';
+      }, 5000);
+    } else {
+      mensaje.style.display = 'block';
+      mensaje.style.backgroundColor = '#f8d7da';
+      mensaje.style.color = '#721c24';
+      mensaje.style.borderColor = '#f5c6cb';
+      mensaje.textContent = 'Hubo un error al enviar. Por favor, intenta nuevamente.';
+      
+      setTimeout(() => {
+        mensaje.style.display = 'none';
+      }, 5000);
+    }
+  });
+</script>
 </body>
 </html>
