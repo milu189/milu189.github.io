@@ -12,55 +12,62 @@
       box-sizing: border-box;
       font-family: 'Segoe UI', sans-serif;
     }
-
-    body {
-      display: flex;
+    body, html {
+      overflow-x: auto;
+      overflow-y: hidden;
       height: 100vh;
-      background-color: #f8f8f8;
-      color: #333;
+      width: 100vw;
     }
-
-    /* Sidebar */
+    
     .sidebar {
-      width: 250px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 80px;
       background-color: #111010;
-      padding: 40px 20px;
+      overflow: hidden;
+      transition: width 0.3s ease;
+      z-index: 1000;
+      padding: 20px 10px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      border-right: 1px solid #eee;
+    }
+
+    .sidebar:hover {
+      width: 250px;
+      padding: 40px 20px;
     }
 
     .logo {
-      font-family: 'Playfair Display', serif;  
+      font-family: 'Playfair Display', serif;
       font-size: 2rem;
       font-weight: bold;
       color: #fdfbfb;
-       position: relative;
-  padding-bottom: 10px;
-  margin-bottom: 30px;
-  display: inline-block;
-  text-transform: uppercase;
-  letter-spacing: 2px;
+      position: relative;
+      padding-bottom: 10px;
+      margin-bottom: 30px;
+      display: inline-block;
+      text-transform: uppercase;
+      letter-spacing: 2px;
     }
-    
-.logo::after {
-  content: "";
-  position: absolute;
-  width: 40px;
-  height: 3px;
-  background-color: #007bff;
-  bottom: 0;
-  left: 0;
-  border-radius: 2px;
-}
 
-    .logo span {
-      color: #007bff;
+    .logo::after {
+      content: "";
+      position: absolute;
+      width: 40px;
+      height: 3px;
+      background-color: #007bff;
+      bottom: 0;
+      left: 0;
+      border-radius: 2px;
     }
 
     .menu a {
-      display: block;
+      display: flex;
+      align-items: center;
+      gap: 10px;
       margin: 20px 0;
       color: #9e9c9c;
       text-decoration: none;
@@ -70,9 +77,23 @@
     .menu a:hover {
       color: #007bff;
     }
+
+    .menu a .text {
+      display: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .sidebar:hover .menu a .text {
+      display: inline;
+      opacity: 1;
+    }
+
     .footer {
       font-size: 12px;
       color: #888;
+      margin-top: auto;
+      padding-top: 30px;
+      line-height: 1.4;
     }
 
     .footer a {
@@ -88,9 +109,33 @@
       padding: 60px;
     }
 
-    .info {
-      max-width: 50%;
+    .container {
+      display: flex;
+      flex-direction: row;
+      height: 100vh;
+      width: 500vw;
+      scroll-snap-type: x mandatory;
+      overflow-x: scroll;
+      scroll-behavior: smooth;
+      margin-left: 60px;
+      transition: margin-left 0.3s ease;
     }
+
+    .sidebar:hover ~ .container {
+      margin-left: 250px;
+    }
+
+    section {
+      flex: 0 0 100vw;
+      height: 100vh;
+      scroll-snap-align: start;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      color: white;
+    }
+
 
     .info h1 {
       font-size: 48px;
@@ -206,16 +251,15 @@
 </style>
 </head>
 <body>
-  
-  <div class="sidebar">
+  <div class="sidebar" id="sidebar">
     <div>
       <div class="logo">MR</div>
       <div class="menu">
-        <a href="#">Inicio</a>
-        <a href="#">Acerca de mí</a>
-        <a href="#">Portafolio</a>
-        <a href="#">Aptitudes | Habilidades</a>
-        <a href="#">Contactame</a>
+        <a href="#info"><i class="fas fa-home"></i><span class="text">Inicio</span></a>
+        <a href="#about"><i class="fas fa-user"></i><span class="text">Acerca de mí</span></a>
+        <a href="#portafolio"><i class="fas fa-briefcase"></i><span class="text">Portafolio</span></a>
+        <a href="#habilidades"><i class="fas fa-lightbulb"></i><span class="text">Aptitudes</span></a>
+        <a href="#contacto"><i class="fas fa-envelope"></i><span class="text">Contactame</span></a>
       </div>
     </div>
     <div class="footer">
