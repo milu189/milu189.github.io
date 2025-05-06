@@ -13,11 +13,35 @@
       font-family: 'Segoe UI', sans-serif;
     }
 
-    body {
-      display: flex;
+    body, html {
+      margin: 0;
+      padding: 0;
+      overflow-x: auto;
+      overflow-y: hidden;
       height: 100vh;
-      background-color: #f8f8f8;
-      color: #333;
+      width: 100vw;
+    }
+  
+    /* me hace el scroll y el ancho de pantalla*/
+    .container {
+      display: flex;
+      flex-direction: row;
+      height: 100vh;
+      width: 500vw; /* 5 secciones = 5 * 100vw */
+      scroll-snap-type: x mandatory;
+      overflow-x: scroll;
+      scroll-behavior: smooth;
+    }
+
+    section {
+      flex: 0 0 100vw;
+      height: 100vh;
+      scroll-snap-align: start;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      color: white;
     }
 
     /* Sidebar */
@@ -206,16 +230,16 @@
 </style>
 </head>
 <body>
-  
+  <div class="container">
   <div class="sidebar">
     <div>
       <div class="logo">MR</div>
       <div class="menu">
-        <a href="#">Inicio</a>
-        <a href="#">Acerca de mí</a>
-        <a href="#">Portafolio</a>
-        <a href="#">Aptitudes | Habilidades</a>
-        <a href="#">Contactame</a>
+        <a href="#inicio">Inicio</a>
+        <a href="#about">Acerca de mí</a>
+        <a href="#portafolio">Portafolio</a>
+        <a href="#habilidades">Aptitudes | Habilidades</a>
+        <a href="#contacto">Contactame</a>
       </div>
     </div>
     <div class="footer">
@@ -223,7 +247,7 @@
     </div>
   </div>
   <div class="main">
-    <div class="info">
+    <div id="inicio" class="info">
       <h1>Milagros Rimolo</h1>
       <div class="typing" id="typing"></div>
       <div class="socials">
@@ -239,7 +263,7 @@
       <img src="tu-imagen.jpg" alt="Milagros Rimolo">
     </div>
   </div>
-  <section class="about-me">
+  <section id="about" class="about-me">
     <div class="about-container">
       <div class="about-photo">
         <img src="tu-imagen.jpg" alt="Milagros Rimolo">
@@ -360,17 +384,16 @@
         Enviar Mensaje
       </button>
     </form>
+    
+    <!-- Imagen de celular con QR -->
+<div style="flex: 1; min-width: 300px; max-width: 400px; text-align: center;">
+  <img src="celular-mockup.png" alt="Escanea para contactarme" style="max-width: 100%; border-radius: 20px; box-shadow: 0 0 20px rgba(0,0,0,0.3);">
+  <p style="margin-top: 1rem; color: #ccc;">Escaneá el código QR para hablarme directamente por WhatsApp</p>
+</div>
 
-    <!-- Info de contacto QR -->
-    <div
-      style="flex: 1; min-width: 300px; max-width: 400px; background: #1e1e24; padding: 2rem; border-radius: 1rem; box-shadow: 0 0 15px rgba(0,0,0,0.3); text-align: center;">
-      <p style="font-size: 1.5rem; color: #ffffff; margin-bottom: 1rem;"><i data-lucide="phone" style="vertical-align: middle; margin-right: 0.5rem;"></i>WhatsApp</p>
-      <p style="font-size: 1.2rem; color: #bbb; margin-bottom: 2rem;"><strong>+54 9 2352 562830</strong></p>
-      <img src="codqr.png" alt="QR WhatsApp"
-        style="width: 200px; height: 200px; object-fit: cover; border-radius: 0.5rem; transition: transform 0.3s ease;"
-        onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-    </div>
   </div>
+</section>
+
 
   <!-- Mensaje de confirmación -->
   <div id="mensaje-enviado"
@@ -378,7 +401,7 @@
     ¡Gracias! Tu mensaje fue enviado.
   </div>
 </section>
-
+</div>
 <script>
   lucide.createIcons();
 </script>
